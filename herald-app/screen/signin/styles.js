@@ -1,0 +1,57 @@
+/**
+ * Created by WolfTungsten on 2018/2/16.
+ */
+import { StyleSheet } from 'react-native';
+
+export default StyleSheet.create({
+    body:{
+        justifyContent:'center',
+        alignItems:'stretch',
+        height:'100%',
+        backgroundColor:'#FFFFFF'
+    },
+    image:{
+        width:100,
+        height:100,
+        alignSelf:'center'
+    },
+    signin:{
+        justifyContent:'center',
+        alignItems:'stretch',
+        paddingLeft:36,
+        paddingRight:36,
+        flexGrow:100
+    },
+    copyright:{
+        alignSelf:'center',
+        padding:25
+    },
+    title:{
+        fontSize:36,
+        fontWeight:'bold',
+        color:'#555555',
+    },
+    subTitle:{
+        fontSize:14,
+        color:'#A6A6A6',
+        paddingTop:17
+    },
+    failMessage:{
+        fontSize:14,
+        color:'#EB5757',
+        paddingTop:10,
+        paddingBottom:10
+    },
+    button:{
+        alignSelf:'flex-start',
+    },
+    accept:{
+        flexDirection:'row',
+        alignSelf:'center'
+    },
+    acceptText:{
+        fontSize:12,
+        padding:5,
+        color:'#A6A6A6'
+    }
+})

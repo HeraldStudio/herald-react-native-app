@@ -1,0 +1,6 @@
+.idea
+
+./herald-app/.expo/
+./herald-app/.idea/
+./herald-app/node_modules/
+./herald-app/yarn.lock
