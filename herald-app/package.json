@@ -25,6 +25,7 @@
     "js-cookie": "^2.2.0",
     "react": "16.2.0",
     "react-native": "0.52.0",
+    "react-native-blur": "^3.2.2",
     "react-native-drawer": "^2.5.0",
     "react-navigation": "^1.1.1"
   }

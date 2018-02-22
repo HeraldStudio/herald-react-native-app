@@ -1,21 +1,23 @@
 /**
  * Created by WolfTungsten on 2018/2/12.
  */
-import React from 'react';
-import { StyleSheet, Text, View, Image, Button, TextInput, ScrollView, Platform} from 'react-native';
-import { StackNavigator, TabNavigator, TabBarBottom } from 'react-navigation';
-import Drawer from 'react-native-drawer'
-import style from './styles';
-import HeraldButton from '../../herald-component/herald-button';
-import {heraldApp} from '../../AppInit';
+import React from "react";
+import {Image, Text, View} from "react-native";
+import {StackNavigator, TabBarBottom, TabNavigator} from "react-navigation";
+import Drawer from "react-native-drawer";
+import HeraldButton from "../../herald-component/herald-button";
+import HeraldAppBar from "../../herald-component/herald-appbar";
+import {heraldApp} from "../../AppInit";
 
-import Home from '../home/home';
-import Notification from '../notification/notification';
-import Activity from '../activity/activity';
-import App from "../../App";
+import Home from "../home/home";
+import Notification from "../notification/notification";
+import Activity from "../activity/activity";
+
+// StackNavigator
 
 
-export default class RootPage extends React.Component {
+const appbarIcon = require('../../resource/img/appBar.png');
+class RootPage extends React.Component {
     constructor(props){
         super(props)
 
@@ -34,38 +36,15 @@ export default class RootPage extends React.Component {
             acceptPan={true}
             panOpenMask={0.25}
         >
-            <AppBar/>
-            <RootTab/>
+            <HeraldAppBar icon={appbarIcon} showLeft={true} leftIcon={require('../../resource/img/backButton.png')}
+                          showRight={true} rightIcon={require('../../resource/img/backButton.png')}/>
+            <TabPage/>
         </Drawer>
 
         )
     }
 }
 
-class AppBar extends React.Component {
-    constructor(props){
-        super(props)
-    }
-    render(){
-        return(
-            <View style={{
-                width:'100%',
-                height:70 + (Platform.OS === 'ios' ? 10 : 0) ,
-                flexDirection:'row',
-                backgroundColor:'#FFFFFF',
-                paddingTop:20,
-                alignItems:'center',
-                justifyContent:'flex-end',
-                borderBottomWidth:1,
-                borderBottomColor:'#E5E5E5'
-            }}>
-                <Image style={{
-                    height:40,
-                }} source={require('../../resource/img/AppBar.png')} resizeMode={Image.resizeMode.contain}/>
-            </View>
-        )
-    }
-}
 
 // 抽屉内容
 class DrawerContent extends React.Component {
@@ -106,14 +85,14 @@ class TabIcon extends React.Component {
     }
 }
 
+//主屏TabNavigation
 const activityIcon = require('../../resource/icon/tab/activity.png');
 const notificationIcon = require('../../resource/icon/tab/notification.png');
 const homeIcon = require('../../resource/icon/tab/home.png');
 const activityIconSelected = require('../../resource/icon/tab/activity-selected.png');
 const notificationIconSelected = require('../../resource/icon/tab/notification-selected.png');
 const homeIconSelected = require('../../resource/icon/tab/home-selected.png');
-//主屏TabNavigation
-const RootTab = TabNavigator(
+const TabPage = TabNavigator(
     {
         Home:{
             screen:Home,
@@ -185,6 +164,17 @@ const RootTab = TabNavigator(
 
         }),
     }
-)
+);
 
+
+export default HeraldRoot = StackNavigator(
+    {
+        RootPage: {
+            screen: RootPage
+        }
+    },
+    {
+        headerMode: 'none'
+    }
+)
 

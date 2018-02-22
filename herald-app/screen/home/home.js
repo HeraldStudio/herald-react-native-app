@@ -1,18 +1,12 @@
 /**
  * Created by WolfTungsten on 2018/2/21.
  */
-import React from 'react';
-import { StyleSheet, Text, View, Image, Button, TextInput, ScrollView} from 'react-native';
-import { StackNavigator } from 'react-navigation';
-import Drawer from 'react-native-drawer'
-import HeraldButton from '../../herald-component/herald-button';
-import HeraldCard from '../../herald-component/herald-card';
-import {heraldApp} from '../../AppInit';
+import React from "react";
+import {ScrollView, Text, View} from "react-native";
+import HeraldCard from "../../herald-component/herald-card";
 
-export class HomePage extends React.Component {
-    static navigationOptions = {
-        headerMode:'none'
-    };
+export default class Home extends React.Component {
+
     constructor (props) {
         super(props)
     }
@@ -20,9 +14,17 @@ export class HomePage extends React.Component {
     render () {
         return (
             <View style={{
-                flex:1
+                flex: 1,
+                backgroundColor: '#FFFFFF'
             }}>
-        <ScrollView contentContainerStyle={{padding:17,paddingBottom:0,justifyContent:'flex-start',alignItems:'stretch',backgroundColor:'#FFFFFF'}}>
+                <ScrollView contentContainerStyle={{
+                    padding: 17,
+                    paddingTop: 90,
+                    paddingBottom: 0,
+                    justifyContent: 'flex-start',
+                    alignItems: 'stretch',
+                    backgroundColor: '#FFFFFF'
+                }}>
             <HeraldCard label="测试卡片" new={false}>
                 <View style={{
                     height:200,
@@ -78,11 +80,5 @@ export class HomePage extends React.Component {
         )
 
     }
-
 }
 
-export default Home = StackNavigator({
-    Home:{screen:HomePage}
-},{
-    headerMode:'none'
-})

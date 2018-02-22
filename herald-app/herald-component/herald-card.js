@@ -1,8 +1,8 @@
 /**
  * Created by WolfTungsten on 2018/2/21.
  */
-import React from 'react';
-import { StyleSheet, Text, View, TextInput, Platform, TouchableOpacity, TouchableNativeFeedback} from 'react-native';
+import React from "react";
+import {Text, TouchableOpacity, View} from "react-native";
 
 export default class HeraldCard extends React.Component {
     render () {
@@ -33,11 +33,13 @@ export default class HeraldCard extends React.Component {
                         marginTop:0
                     }}><Text/></View> : <View><Text/></View>}
                 </View>
-                <View style={{
+                <TouchableOpacity style={{
                     backgroundColor:'#F9F9F9'
+                }} onPress={() => {
+                    this.props.onPress()
                 }}>
                     {this.props.children}
-                </View>
+                </TouchableOpacity>
             </View>
         )
     }

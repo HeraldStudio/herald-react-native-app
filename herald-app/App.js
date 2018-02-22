@@ -1,10 +1,7 @@
-import React from 'react';
-import { StyleSheet, Text, View, Image, Button} from 'react-native';
-import { StackNavigator } from 'react-navigation';
-import {AppInit, heraldApp} from './AppInit'
-import SignInScreen from './screen/signin/signin'
-import RootPage from './screen/rootpage/rootpage'
-import HeraldButton from './herald-component/herald-button'
+import React from "react";
+import {AppInit, heraldApp} from "./AppInit";
+import SignInScreen from "./screen/signin/signin";
+import Root from "./screen/rootpage/rootpage";
 export default class App extends React.Component {
     constructor(props) {
         super(props);
@@ -24,7 +21,7 @@ export default class App extends React.Component {
     render() {
         if (this.state.isLogin) {
             return (
-                <RootPage style={{flex:1}}/>
+                <Root style={{flex: 1}}/>
             );
         } else {
             return (
