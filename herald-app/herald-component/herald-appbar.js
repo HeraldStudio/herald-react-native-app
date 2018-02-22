@@ -77,21 +77,19 @@ export default class HeraldAppBar extends React.Component {
                         zIndex: 11
                     }} onPress={() => {
                         this.toggleMenu();
-                        console.log('点击菜单背景了')
                     }}>
                         <TouchableOpacity style={{
                             backgroundColor: '#FFFFFF',
                             width: '40%',
                             minHeight: 60,
                             marginTop: 7,
-                            borderRadius: 3,
+                            borderRadius: 0,
                             borderWidth: 0,
                             borderColor: '#A6A6A6',
                             marginRight: 10,
                             zIndex: 12
                         }} onPress={() => {
                             this.toggleMenu();
-                            console.log('点击菜单了')
                         }}>
                             {this.props.menu}
                         </TouchableOpacity>
