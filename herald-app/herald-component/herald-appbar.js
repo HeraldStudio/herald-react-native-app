@@ -11,6 +11,9 @@ export default class HeraldAppBar extends React.Component {
         this.state = {
             menuOn: false
         }
+        setInterval(() => {
+            this.render()
+        }, 10)
     }
 
     toggleMenu() {
@@ -24,7 +27,7 @@ export default class HeraldAppBar extends React.Component {
                 zIndex: 10,
                 width: '100%'
             }}>
-                <View style={{
+                <View tint="default" intensity={80} style={{
                     width: '100%',
                     height: 70 + (Platform.OS === 'ios' ? 10 : 0),
                     flexDirection: 'row',
@@ -45,7 +48,7 @@ export default class HeraldAppBar extends React.Component {
                             }} source={this.props.leftIcon} resizeMode={Image.resizeMode.contain}/>
                         </TouchableOpacity> : <View/>
                     }
-                    <View style={{
+                    <View tint="default" intensity={80} style={{
                         flexGrow: 1,
                         flexDirection: 'row',
                         justifyContent: 'flex-start',
@@ -55,6 +58,7 @@ export default class HeraldAppBar extends React.Component {
                         <Image style={{
                             height: 40,
                             width: 150,
+                            backgroundColor: '#FFFFFF'
                         }} source={this.props.icon} resizeMode={Image.resizeMode.contain}/>
                     </View>
                     {this.props.showRight ?

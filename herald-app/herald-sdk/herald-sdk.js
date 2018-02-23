@@ -131,7 +131,7 @@ export class HeraldSDK {
             cache: cache = true, // 大多数请求是需要缓存的，对于不适合缓存的请求可是设置cache为false
         } = options;
         // 使用method+URL作为缓存的 storageKey
-        let storageKey = `cache:${method.toUpperCase()}:${url}`;
+        let storageKey = `cache:${method.toUpperCase()}:${url}:${JSON.stringify(params)}:${JSON.stringify(data)}`;
         // 先读取缓存数据作为后面的比较依据
         let cacheData = await this.storage.get(storageKey);
         let timer;
