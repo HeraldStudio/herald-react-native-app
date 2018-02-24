@@ -1,18 +1,18 @@
 /**
  * Created by WolfTungsten on 2018/2/23.
  */
-import React from 'react';
-import HeraldCard from '../../herald-component/herald-card';
-import {View, Text, StyleSheet} from 'react-native';
-import {heraldApp} from '../../AppInit';
+import React from "react";
+import HeraldCard from "../../herald-component/herald-card";
+import {Text, View} from "react-native";
+import {heraldApp} from "../../AppInit";
 // 主页一卡通卡片
 export class AllinoneCard extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            balance:'正在加载',
-            todayAmount:'正在加载',
-            status:'正在加载',
+            balance: '...',
+            todayAmount: '...',
+            status: '...',
             fresh:false
         };
 
@@ -63,9 +63,9 @@ class TextPanel extends React.Component {
             <View style={{
                 justifyContent:'center',
                 alignItems:'center',
-                minHeight:60,
-                minWidth:60,
-                padding:20
+                flex: 1,
+                paddingTop: 10,
+                paddingBottom: 10
             }}>
                 <Text style={{
                     textAlign:'center',
@@ -78,7 +78,6 @@ class TextPanel extends React.Component {
                     color:'rgba(49,165,242,1)',
                     fontWeight:'bold',
                     padding:10,
-                    minWidth:40
                 }}>{this.props.value}</Text>
             </View>
         )

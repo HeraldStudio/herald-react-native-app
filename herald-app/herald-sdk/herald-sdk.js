@@ -8,7 +8,7 @@
  * 2.根据路由持久化
  */
 
-import {AsyncStorage} from "react-native";
+import {AsyncStorage, Platform} from "react-native";
 import axios from "axios";
 const qs = require('querystring');
 
@@ -91,7 +91,13 @@ export class HeraldSDK {
     async auth(cardnum, password){
         let res;
         try {
-            res = (await axios.post(this.serverURL + '/auth', {cardnum, password, platform:'react-native'})).data;
+            let request = new Request(this.serverURL + '/auth', {
+                method: 'POST',
+                body: qs.stringify({cardnum, password, platform: 'react-native-' + Platform.OS}),
+                headers: new Headers({'content-type': 'application/x-www-form-urlencoded'})
+            });
+            let response = await fetch(request);
+            res = await response.json();
         } catch (e) {
             throw Error('Ooops，登录失败了，检查下网络连接状况？🤔')
         }
@@ -114,6 +120,7 @@ export class HeraldSDK {
             this.token = token;
             return true
         } else {
+            console.log(res);
             throw Error('Ooops，登录失败了，密码输对了吗？🤨')
         }
     }
@@ -123,88 +130,6 @@ export class HeraldSDK {
         this.ready = false;
         this.token = '';
         this.onLogout()
-    }
-
-    async fetchData(url, options = {}, render = () => {
-    }) {
-        let {
-            method: method = 'get',
-            params: params = {},
-            data: data = {},
-            cache: cache = true, // 大多数请求是需要缓存的，对于不适合缓存的请求可是设置cache为false
-        } = options;
-        // 使用method+URL作为缓存的 storageKey
-        let storageKey = `cache:${method.toUpperCase()}:${url}:${JSON.stringify(params)}:${JSON.stringify(data)}`;
-        // 先读取缓存数据作为后面的比较依据
-        let cacheData = await this.storage.get(storageKey);
-        let timer;
-        if (cache) {
-            // 读取缓存的promise
-            let cacheReader = new Promise((resolve, reject) => {
-                // 若向服务器请求的数据不能再1s内到达，则先将缓存中的数据渲染到组件
-                timer = setTimeout(() => {
-                    resolve(cacheData)
-                }, 1000);
-            });
-            cacheReader.then((data) => {
-                if (data) {
-                    // 如果有缓存数据则渲染
-                    render({
-                        status: 'cache',
-                        data
-                    })
-                }
-            })
-        }
-        try {
-            let fetchData = (await this.axios.request({url, method, params, data, timeout: 17000}));
-            console.log(fetchData);
-            fetchData = fetchData.data;
-            if (fetchData.code === 200) {
-                //返回为200
-                if (cache) {
-                    // 如果启用了缓存
-                    try {
-                        clearTimeout(timer)
-                    } catch (e) {
-                    }
-                    let newData = toString(fetchData.result);
-                    if (newData !== toString(cacheData)) {
-                        // 如果新数据和旧数据不同
-                        // 重新渲染数据
-                        render({
-                            status: 'fetch',
-                            data: fetchData.result
-                        });
-                        // 缓存数据
-                        this.storage.set(storageKey, newData);
-                    }
-                } else {
-                    render({
-                        status: 'fetch',
-                        data: fetchData.result
-                    });
-                }
-                return fetchData; // 预留给需要直接获取到数据的情况
-            } else if (fetchData.code === 401) {
-                // 遇到401错误直接deauth，要求重新登录
-                this.deauth()
-            } else {
-                // 其他服务端错误不展示给用户
-            }
-        } catch (e) {
-            console.log(e);
-            if (cache && cacheData) {
-                render({
-                    status:'cache',
-                    data:cacheData
-                })
-            } else {
-                render({
-                    status: 'error'
-                })
-            }
-        }
     }
 
     async fetchUIData(url, method, args, callback){
@@ -221,7 +146,8 @@ export class HeraldSDK {
         // Step2: Fetch data from server.
         // Construct request
         let headers = new Headers({
-            'token':this.token
+            'token': this.token,
+            'content-type': 'application/x-www-form-urlencoded'
         });
         let request;
         method = method.toUpperCase();
