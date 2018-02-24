@@ -5,6 +5,8 @@ import React from "react";
 import {ScrollView, Text, View} from "react-native";
 import HeraldCard from "../../herald-component/herald-card";
 
+import {AllinoneCard} from "../allinoneCard/allinoneCard";
+
 export default class Home extends React.Component {
 
     constructor (props) {
@@ -25,56 +27,7 @@ export default class Home extends React.Component {
                     alignItems: 'stretch',
                     backgroundColor: '#FFFFFF'
                 }}>
-            <HeraldCard label="测试卡片" new={false}>
-                <View style={{
-                    height:200,
-                    alignItems:'center',
-                    display:'flex',
-                    justifyContent:'center'
-                }}>
-                    <Text>测试卡片</Text>
-                </View>
-            </HeraldCard>
-            <HeraldCard label="测试卡片" new={false}>
-                <View style={{
-                    height:200,
-                    alignItems:'center',
-                    display:'flex',
-                    justifyContent:'center'
-                }}>
-                    <Text>测试卡片</Text>
-                </View>
-            </HeraldCard>
-            <HeraldCard label="测试卡片" new={false}>
-                <View style={{
-                    height:200,
-                    alignItems:'center',
-                    display:'flex',
-                    justifyContent:'center'
-                }}>
-                    <Text>测试卡片</Text>
-                </View>
-            </HeraldCard>
-            <HeraldCard label="测试卡片" new={false}>
-                <View style={{
-                    height:200,
-                    alignItems:'center',
-                    display:'flex',
-                    justifyContent:'center'
-                }}>
-                    <Text>测试卡片</Text>
-                </View>
-            </HeraldCard>
-            <HeraldCard label="测试卡片" new={false}>
-                <View style={{
-                    height:200,
-                    alignItems:'center',
-                    display:'flex',
-                    justifyContent:'center'
-                }}>
-                    <Text>测试卡片</Text>
-                </View>
-            </HeraldCard>
+            <AllinoneCard/>
         </ScrollView>
             </View>
         )

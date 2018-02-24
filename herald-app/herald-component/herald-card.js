@@ -23,7 +23,7 @@ export default class HeraldCard extends React.Component {
                 }}>
                     <Text style={{
                         color:'#FFFFFF'
-                    }}>{this.props.label}</Text>
+                    }} onPress={() => {this.props.onLabelPress()}}>{this.props.label}</Text>
                     {this.props.new ? <View style={{
                         backgroundColor:'#00FF00',
                         width:9,

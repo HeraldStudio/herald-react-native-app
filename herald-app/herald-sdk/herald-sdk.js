@@ -10,7 +10,7 @@
 
 import {AsyncStorage} from "react-native";
 import axios from "axios";
-import qs from "querystring";
+const qs = require('querystring');
 
 const platform = 'react-native';
 
@@ -74,15 +74,16 @@ export class HeraldSDK {
                     headers: {'token': token},
                     transformRequest(req) {
                         if (typeof req === 'object') {
-                            return qs.stringify(req)
+                            return qs.stringify(req);
                         }
-                        return req
+                        return req;
                     },
                 });
-                this.onLogin(token)
+                this.token = token;
+                this.onLogin(token);
             } else {
                 // 读取token不成功
-                this.onLogout()
+                this.onLogout();
             }
         })
     }
@@ -98,6 +99,7 @@ export class HeraldSDK {
             this.ready = true;
             let token = res.result;
             await this.storage.set('token', res.result);
+            // 即将废弃
             this.axios = axios.create({
                 baseURL:this.serverURL,
                 headers: {'token': token},
@@ -109,6 +111,7 @@ export class HeraldSDK {
                 },
             });
             this.onLogin(token);
+            this.token = token;
             return true
         } else {
             throw Error('Ooops，登录失败了，密码输对了吗？🤨')
@@ -144,14 +147,19 @@ export class HeraldSDK {
                 }, 1000);
             });
             cacheReader.then((data) => {
-                render({
-                    status: 'cache',
-                    data
-                })
+                if (data) {
+                    // 如果有缓存数据则渲染
+                    render({
+                        status: 'cache',
+                        data
+                    })
+                }
             })
         }
         try {
-            let fetchData = (await this.axios.request({url, method, params, data, timeout: 17000})).data;
+            let fetchData = (await this.axios.request({url, method, params, data, timeout: 17000}));
+            console.log(fetchData);
+            fetchData = fetchData.data;
             if (fetchData.code === 200) {
                 //返回为200
                 if (cache) {
@@ -171,6 +179,11 @@ export class HeraldSDK {
                         // 缓存数据
                         this.storage.set(storageKey, newData);
                     }
+                } else {
+                    render({
+                        status: 'fetch',
+                        data: fetchData.result
+                    });
                 }
                 return fetchData; // 预留给需要直接获取到数据的情况
             } else if (fetchData.code === 401) {
@@ -180,11 +193,80 @@ export class HeraldSDK {
                 // 其他服务端错误不展示给用户
             }
         } catch (e) {
-            render({
-                status: 'error'
-            })
+            console.log(e);
+            if (cache && cacheData) {
+                render({
+                    status:'cache',
+                    data:cacheData
+                })
+            } else {
+                render({
+                    status: 'error'
+                })
+            }
         }
     }
 
-
+    async fetchUIData(url, method, args, callback){
+        // Step1: Load data from storage and rend it into UI immediately.
+        let storageKey = `cache:${method.toUpperCase()}:${url}:${JSON.stringify(args)}`;
+        let cacheData = await this.storage.get(storageKey);
+        if (cacheData) {
+            // The first kind of data, comes from cache with `source` field of 'cache'
+            callback({
+                source:'cache',
+                data:cacheData
+            });
+        }
+        // Step2: Fetch data from server.
+        // Construct request
+        let headers = new Headers({
+            'token':this.token
+        });
+        let request;
+        method = method.toUpperCase();
+        if (args) {
+            args = qs.stringify(args);
+        } else {
+            args = '';
+        }
+        if ( method === 'GET' || method === 'DELETE' ) {
+            // Need to convert args to query string
+            url = this.serverURL + url + '?' +args;
+            request = new Request(url, {method, headers})
+        } else {
+            url = this.serverURL + url;
+            request = new Request(url, {method, headers, body:args});
+        }
+        // Fetch in the hole!
+        try {
+            let response = await fetch(request);
+            let body = await response.json();
+            if (body.code === 200) {
+                // Step3: Check if data is new
+                cacheData = toString(cacheData);
+                let fetchData = toString(body.result);
+                console.log(cacheData);
+                console.log(fetchData);
+                if (fetchData !== cacheData) {
+                    // Got new data
+                    callback({
+                        source:'fetch',
+                        data:body.result
+                    });
+                    // Update the storage
+                    this.storage.set(storageKey, fetchData);
+                }
+            } else if (body.code === 401) {
+                this.deauth();
+            } else {
+                // ignore the other error
+            }
+        } catch (e) {
+            console.log(e.message);
+            callback({
+                source:'error'
+            })
+        }
+    }
 }
