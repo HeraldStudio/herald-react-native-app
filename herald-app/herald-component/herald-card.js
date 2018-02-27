@@ -15,7 +15,9 @@ export default class HeraldCard extends React.Component {
             }}>
                 <View style={{
                     backgroundColor:'#555555',
-                    padding:10,
+                    padding: 6,
+                    paddingLeft: 10,
+                    paddingRight: 10,
                     flexDirection:'row',
                     alignSelf:'flex-start',
                     justifyContent:'center',

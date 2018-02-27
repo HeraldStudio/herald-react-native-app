@@ -2,15 +2,15 @@
  * Created by WolfTungsten on 2018/2/12.
  */
 //React Native 基础
-import React from 'react';
-import { StyleSheet, Text, View, Image, Button, TextInput, ScrollView} from 'react-native';
-import { StackNavigator } from 'react-navigation';
-import style from './styles'
+import React from "react";
+import {Image, Text, View} from "react-native";
+import {StackNavigator} from "react-navigation";
+import style from "./styles";
 //Herald Component 自定义组件
-import HeraldTextInput from '../../herald-component/herald-textinput';
-import HeraldButton from '../../herald-component/herald-button';
+import HeraldTextInput from "../../herald-component/herald-textinput";
+import HeraldButton from "../../herald-component/herald-button";
 //全局对象
-import {heraldApp} from '../../AppInit';
+import {heraldApp} from "../../AppInit";
 class SignIn extends React.Component {
     constructor(props){
         super(props);
@@ -42,9 +42,13 @@ class SignIn extends React.Component {
                     <Text style={style.title}>统一身份认证</Text>
                     <Text style={style.subTitle}>震惊！用了小猴偷米以后，腰不酸了，腿不疼了，甚至还想穿女装了</Text>
                     {this.state.fail ? <Text style={style.failMessage}>{this.state.failMessage}</Text> : null}
-                    <HeraldTextInput label="一卡通号" onChangeText={(text) => {this.setState({cardnum:text})}}
+                    <HeraldTextInput label="一卡通号" value={this.state.cardnum} onChangeText={(text) => {
+                        this.setState({cardnum: text})
+                    }}
                                      keyboardType="numeric"/>
-                    <HeraldTextInput label="统一身份认证密码" onChangeText={(text) => {this.setState({password:text})}}
+                    <HeraldTextInput label="统一身份认证密码" value={this.state.password} onChangeText={(text) => {
+                        this.setState({password: text})
+                    }}
                                      isPassword={true}/>
                     <HeraldButton style={style.button} textColor="#FFFFFF" backgroundColor="#00ABD4" label="现在登录" onPress={()=>{this.auth()}}/>
                 </View>

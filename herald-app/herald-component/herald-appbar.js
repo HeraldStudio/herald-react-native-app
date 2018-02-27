@@ -2,7 +2,7 @@
  * Created by WolfTungsten on 2018/2/22.
  */
 //AppBar
-import {Image, Platform, Text, TouchableOpacity, View} from "react-native";
+import {Image, Platform, TouchableOpacity, View} from "react-native";
 import React from "react";
 
 export default class HeraldAppBar extends React.Component {
@@ -23,9 +23,9 @@ export default class HeraldAppBar extends React.Component {
     render() {
         return (
             <View style={{
-                position: 'absolute',
                 zIndex: 10,
-                width: '100%'
+                width: '100%',
+                backgroundColor: '#FFFFFF'
             }}>
                 <View tint="default" intensity={80} style={{
                     width: '100%',
@@ -97,7 +97,7 @@ export default class HeraldAppBar extends React.Component {
                         }}>
                             {this.props.menu}
                         </TouchableOpacity>
-                    </TouchableOpacity> : <View><Text> </Text></View>}
+                    </TouchableOpacity> : <View/>}
             </View>
 
         )
