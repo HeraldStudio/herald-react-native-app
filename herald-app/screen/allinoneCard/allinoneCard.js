@@ -11,7 +11,7 @@ export class AllinoneCard extends React.Component {
         super(props);
         this.state = {
             balance: '...',
-            todayAmount: '...',
+            count: '...',
             status: '...',
             fresh:false
         };
@@ -25,19 +25,24 @@ export class AllinoneCard extends React.Component {
     refresh(){
         heraldApp.sdk.fetchUIData('/api/card', 'GET', {}, (data) => {this.databind(data)});
     }
-    databind(data){
 
-        console.log(data);
+    databind(data){
         if (data.source !== 'error') {
             this.setState({fresh: data.source === 'fetch'});
             this.setState({balance: data.data.info.balance});
+            this.setState({status: data.data.info.status.mainStatus});
+            this.setState({count: data.data.detail.length});
         }
 
     }
 
     render(){
         return (
-            <HeraldCard new={this.state.fresh} label="一卡通" onLabelPress={()=>{this.refresh()}} onPress={()=>{console.log('allinonecard')}}>
+            <HeraldCard new={this.state.fresh} label="一卡通" onLabelPress={() => {
+                this.refresh()
+            }} onPress={() => {
+                this.props.onPress()
+            }}>
                 <View>
                     <View style={{
                         flexDirection:'row',
@@ -46,8 +51,8 @@ export class AllinoneCard extends React.Component {
                         minHeight:80
                     }}>
                         <TextPanel label="当前余额" value={this.state.balance} />
-                        <TextPanel label="今日消费" value={this.state.todayAmount} />
                         <TextPanel label="卡片状态" value={this.state.status} />
+                        <TextPanel label="今日消费次数" value={this.state.count}/>
                     </View>
                 </View>
             </HeraldCard>

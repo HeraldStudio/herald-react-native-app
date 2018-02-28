@@ -1,9 +1,17 @@
 /**
  * Created by WolfTungsten on 2018/2/19.
  */
-import React from 'react';
-import { StyleSheet, Text, View, Button, TextInput} from 'react-native';
+import React from "react";
+import {StyleSheet, Text, TextInput, View} from "react-native";
 
+/*
+ * props:
+ * - label：显示文字标签
+ * - onChangeText：内容修改回调函数
+ * - isPassword：是否为密码
+ * - placeHolder：占位符
+ * - value：controlled value
+ * */
 export default class HeraldTextInput extends React.Component {
     constructor (props) {
         super(props);
@@ -18,12 +26,13 @@ export default class HeraldTextInput extends React.Component {
                 <Text style={style.label}>{this.props.label}</Text>
                 <TextInput style={[style.input, this.state.focus && style.focus]} onChangeText={this.props.onChangeText}
                            underlineColorAndroid="rgba(0,0,0,0)"
-                            autoFocus={this.props.autoFocus}
-                            placeholder={this.props.placeholder}
+                           autoFocus={this.props.autoFocus}
+                           placeholder={this.props.placeholder}
                            secureTextEntry={this.props.isPassword}
                            keyboardType={this.props.keyboardType}
                            onFocus={() => {this.setState({focus:true})}}
                            onBlur={() => {this.setState({focus:false})}}
+                           value={'' + this.props.value}
                 />
             </View>
         )
@@ -40,9 +49,12 @@ let style = StyleSheet.create({
         color:'#FFFFFF',
         backgroundColor:'#555555',
         textAlign:'center',
-        padding:10,
+        padding: 6,
+        paddingLeft: 10,
+        paddingRight: 10,
         alignSelf:'flex-start',
-        fontSize:14
+        fontSize: 14,
+        fontWeight: 'bold'
     },
     input:{
         fontSize:14,

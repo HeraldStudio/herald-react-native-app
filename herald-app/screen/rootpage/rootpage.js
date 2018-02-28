@@ -13,6 +13,7 @@ import Home from "../home/home";
 import Notification from "../notification/notification";
 import Activity from "../activity/activity";
 import JwcDetail from "../notification/jwcDetail";
+import AllinoneCardScreen from "../allinoneCard/allinoneCardScreen";
 // StackNavigator
 
 
@@ -36,8 +37,8 @@ class RootPage extends React.Component {
             acceptPan={true}
             panOpenMask={0.25}
         >
-            <HeraldAppBar icon={appbarIcon} showLeft={true} leftIcon={require('../../resource/img/backButton.png')}
-                          showRight={true} rightIcon={require('../../resource/img/backButton.png')}/>
+            <HeraldAppBar icon={appbarIcon} showLeft={false} leftIcon={require('../../resource/img/backButton.png')}
+                          showRight={false} rightIcon={require('../../resource/img/backButton.png')}/>
             <TabPage screenProps={{stack: this.props.navigation}}/>
         </Drawer>
 
@@ -174,6 +175,9 @@ export default HeraldRoot = StackNavigator(
         },
         JwcDetail: {
             screen: JwcDetail,
+        },
+        AllinoneCard: {
+            screen: AllinoneCardScreen
         }
     },
     {

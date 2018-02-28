@@ -195,4 +195,43 @@ export class HeraldSDK {
             })
         }
     }
+
+    async fetch(url, method, args) {
+        let request;
+        method = method.toUpperCase();
+        if (method === 'GET' || method === 'DELETE') {
+            url = this.serverURL + url + '?' + qs.stringify(args);
+            request = new Request(url, {
+                method,
+                headers: new Headers({
+                    'token': this.token
+                })
+            });
+        } else {
+            url = this.serverURL + url;
+            request = new Request(url, {
+                method,
+                headers: new Headers({
+                    'token': this.token,
+                    'content-type': 'application/x-www-form-urlencoded'
+                }),
+                body: qs.stringify(args)
+            });
+        }
+        try {
+            let response = await fetch(request);
+            let body = await response.json();
+            if (body.code === 401) {
+                this.deauth();
+            } else {
+                return body;
+            }
+        } catch (e) {
+            return ({
+                success: false,
+                code: -1,
+                reason: `网络连接错误,${e.message}`
+            });
+        }
+    }
 }

@@ -2,8 +2,8 @@
  * Created by WolfTungsten on 2018/2/21.
  */
 import React from "react";
-import {ScrollView, Text, View} from "react-native";
-import HeraldCard from "../../herald-component/herald-card";
+import {ScrollView, View} from "react-native";
+
 import {AllinoneCard} from "../allinoneCard/allinoneCard";
 
 
@@ -21,15 +21,14 @@ export default class Home extends React.Component {
             }}>
                 <ScrollView contentContainerStyle={{
                     padding: 17,
-                    paddingTop: 90,
-                    paddingBottom: 0,
                     justifyContent: 'flex-start',
                     alignItems: 'stretch',
                     backgroundColor: '#FFFFFF'
                 }}>
-            <AllinoneCard/>
-            
-        </ScrollView>
+                    <AllinoneCard onPress={() => {
+                        this.props.screenProps.stack.navigate('AllinoneCard')
+                    }}/>
+                </ScrollView>
             </View>
         )
 
