@@ -12,7 +12,7 @@ import {heraldApp} from "../../AppInit";
 import Home from "../home/home";
 import Notification from "../notification/notification";
 import Activity from "../activity/activity";
-
+import JwcDetail from "../notification/jwcDetail";
 // StackNavigator
 
 
@@ -38,7 +38,7 @@ class RootPage extends React.Component {
         >
             <HeraldAppBar icon={appbarIcon} showLeft={true} leftIcon={require('../../resource/img/backButton.png')}
                           showRight={true} rightIcon={require('../../resource/img/backButton.png')}/>
-            <TabPage/>
+            <TabPage screenProps={{stack: this.props.navigation}}/>
         </Drawer>
 
         )
@@ -171,6 +171,9 @@ export default HeraldRoot = StackNavigator(
     {
         RootPage: {
             screen: RootPage
+        },
+        JwcDetail: {
+            screen: JwcDetail,
         }
     },
     {
