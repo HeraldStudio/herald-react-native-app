@@ -77,9 +77,7 @@ export default class AllinoneCardScreen extends React.Component {
                 <View style={{
                     marginTop: 17,
                     backgroundColor: '#555555',
-                    padding: 6,
-                    paddingLeft: 10,
-                    paddingRight: 10,
+                    padding: 8,
                     flexDirection: 'row',
                     alignSelf: 'flex-start',
                     justifyContent: 'center',
@@ -141,9 +139,7 @@ let style = StyleSheet.create({
     },
     button: {
         backgroundColor: '#31B1F2',
-        padding: 7,
-        paddingLeft: 12,
-        paddingRight: 12,
+        padding: 8,
         alignSelf: 'flex-start',
         marginTop: 17
     }
@@ -167,10 +163,10 @@ class ChoiceButton extends React.Component {
                 textAlign: 'center',
                 padding: 6
             } : {
-                backgroundColor: '#FFFFFF',
-                color: '#31B1F2',
+                backgroundColor: '#F9F9F9',
+                color: '#555555',
                 borderWidth: 1,
-                borderColor: '#31B1F2',
+                borderColor: '#F9F9F9',
                 textAlign: 'center',
                 padding: 6
             }}>

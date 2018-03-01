@@ -49,9 +49,7 @@ let style = StyleSheet.create({
         color:'#FFFFFF',
         backgroundColor:'#555555',
         textAlign:'center',
-        padding: 6,
-        paddingLeft: 10,
-        paddingRight: 10,
+        padding: 8,
         alignSelf:'flex-start',
         fontSize: 14,
         fontWeight: 'bold'
@@ -64,7 +62,7 @@ let style = StyleSheet.create({
         color:'#555555',
     },
     focus:{
-        borderColor:'#00ABD4',
-        borderWidth:1
+        borderColor: '#A9A9A9',
+        borderWidth: 0
     }
 })
