@@ -6,6 +6,9 @@
 # dependencies
 /node_modules
 
+# android device
+/android
+
 # misc
 .env.local
 .env.development.local

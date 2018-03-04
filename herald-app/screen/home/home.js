@@ -6,6 +6,7 @@ import {ScrollView, View} from "react-native";
 
 import {AllinoneCard} from "../allinoneCard/allinoneCard";
 
+
 export default class Home extends React.Component {
 
     constructor (props) {
@@ -24,21 +25,6 @@ export default class Home extends React.Component {
                     alignItems: 'stretch',
                     backgroundColor: '#FFFFFF'
                 }}>
-                    <AllinoneCard onPress={() => {
-                        this.props.screenProps.stack.navigate('AllinoneCard')
-                    }}/>
-                    <AllinoneCard onPress={() => {
-                        this.props.screenProps.stack.navigate('AllinoneCard')
-                    }}/>
-                    <AllinoneCard onPress={() => {
-                        this.props.screenProps.stack.navigate('AllinoneCard')
-                    }}/>
-                    <AllinoneCard onPress={() => {
-                        this.props.screenProps.stack.navigate('AllinoneCard')
-                    }}/>
-                    <AllinoneCard onPress={() => {
-                        this.props.screenProps.stack.navigate('AllinoneCard')
-                    }}/>
                     <AllinoneCard onPress={() => {
                         this.props.screenProps.stack.navigate('AllinoneCard')
                     }}/>
