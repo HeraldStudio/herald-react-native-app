@@ -14,7 +14,6 @@ export default class HeraldButton extends React.Component {
 
     }
     render () {
-
         return (
         <View style={{marginTop:17,padding:10,backgroundColor:this.props.backgroundColor,alignSelf:'flex-start'}}>
             <TouchableOpacity onPress={this.props.onPress}>

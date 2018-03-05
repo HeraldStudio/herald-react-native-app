@@ -23,8 +23,7 @@ export default class HeraldTextInput extends React.Component {
     render () {
         return(
             <View style={style.container}>
-                <Text style={style.label}>{this.props.label}</Text>
-                <TextInput style={[style.input, this.state.focus && style.focus]} onChangeText={this.props.onChangeText}
+                <TextInput style={style.input} onChangeText={this.props.onChangeText}
                            underlineColorAndroid="rgba(0,0,0,0)"
                            autoFocus={this.props.autoFocus}
                            placeholder={this.props.placeholder}
@@ -60,9 +59,5 @@ let style = StyleSheet.create({
         backgroundColor: '#F9F9F9',
         paddingLeft:10,
         color:'#555555',
-    },
-    focus:{
-        borderColor: '#A9A9A9',
-        borderWidth: 0
     }
 })

@@ -130,7 +130,7 @@ let style = StyleSheet.create({
     title: {
         fontSize: 36,
         color: '#555555',
-        fontWeight: 'bold'
+        fontFamily:'regular'
     },
     valueChoice: {
         flexDirection: 'row',
