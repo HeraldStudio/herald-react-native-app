@@ -16,10 +16,7 @@ let AppInit = () => {
         onLogin:heraldApp.onLogin,
         onLogout:heraldApp.onLogout
     });
-    Font.loadAsync({
-        regular:require('./assets/font/regular.ttf'),
-        bold:require('./assets/font/bold.ttf')
-    })
+
 };
 
 export {heraldApp, AppInit}

@@ -6,6 +6,8 @@ import React from "react";
 import {Image, Text, View} from "react-native";
 import {StackNavigator} from "react-navigation";
 import style from "./styles";
+import heraldStyle from "../../resource/herald-style";
+import heraldColor from '../../resource/herald-color';
 //Herald Component 自定义组件
 import HeraldTextInput from "../../herald-component/herald-textinput";
 import HeraldButton from "../../herald-component/herald-button";
@@ -39,9 +41,13 @@ class SignIn extends React.Component {
         return(
             <View style={style.body}>
                 <View style={style.signin}>
-                    <Text style={style.title}>统一身份认证</Text>
-                    <Text style={style.subTitle}>震惊！用了小猴偷米以后，腰不酸了，腿不疼了，甚至还想穿女装了</Text>
+                    <View style={style.title}>
+                    <Image style={style.image} resizeMode={Image.resizeMode.contain} source={require('../../assets/img/icon/icon.png')}/>
+                    <Text style={[heraldStyle.textStyle.title, {paddingTop:20,paddingBottom:10,fontWeight:'bold'}]}>统一身份认证</Text>
+                    <Image style={{width:6,height:4,alignSelf:'center'}} resizeMode={Image.resizeMode.cover} source={require('../../assets/img/polygon.png')}/>
+                    <Text style={[heraldStyle.textStyle.text14, {paddingTop:10, paddingBottom:10, color:heraldColor.secondary}]}>专注公益更懂你</Text>
                     {this.state.fail ? <Text style={style.failMessage}>{this.state.failMessage}</Text> : null}
+                    </View>
                     <HeraldTextInput label="一卡通号" value={this.state.cardnum} onChangeText={(text) => {
                         this.setState({cardnum: text})
                     }}
@@ -53,7 +59,6 @@ class SignIn extends React.Component {
                     <HeraldButton style={style.button} textColor="#FFFFFF" backgroundColor="#00ABD4" label="现在登录" onPress={()=>{this.auth()}}/>
                 </View>
                 <View style={style.copyright}>
-                    <Image style={style.image} resizeMode={Image.resizeMode.contain} source={require('../../resource/img/icon.png')}/>
                     <View style={style.accept}>
                         <Text style={style.acceptText} onPress={() => {this.props.navigation.navigate('UserAgreement')}}>服务条款</Text>
                         <Text style={style.acceptText} onPress={() => {this.props.navigation.navigate('PrivateAgreement')}}>隐私协议</Text>

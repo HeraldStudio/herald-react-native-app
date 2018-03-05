@@ -11,25 +11,23 @@ export default StyleSheet.create({
         backgroundColor:'#FFFFFF'
     },
     image:{
-        width:100,
-        height:100,
+        width:81,
+        height:81,
         alignSelf:'center'
     },
     signin:{
         justifyContent:'center',
         alignItems:'stretch',
-        paddingLeft:36,
-        paddingRight:36,
-        flexGrow:100
+        paddingLeft:27,
+        paddingRight:27,
+        flex:1
     },
     copyright:{
         alignSelf:'center',
         padding:25
     },
     title:{
-        fontSize:36,
-        fontWeight:'bold',
-        color:'#555555',
+        alignSelf:'center'
     },
     subTitle:{
         fontSize:14,

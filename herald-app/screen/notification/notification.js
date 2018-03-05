@@ -31,7 +31,7 @@ export default class Notification extends React.Component {
                 }}>
                     <Jwc nav={this.props.screenProps.stack}/>
                 </ScrollView>
-                
+
             </View>
         )
     }
