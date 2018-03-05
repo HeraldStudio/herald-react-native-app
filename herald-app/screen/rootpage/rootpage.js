@@ -12,7 +12,7 @@ import {heraldApp} from "../../AppInit";
 import Home from "../home/home";
 import Notification from "../notification/notification";
 import Activity from "../activity/activity";
-
+import JwcDetail from "../notification/jwcDetail";
 import AllinoneCardScreen from "../allinoneCard/allinoneCardScreen";
 // StackNavigator
 
@@ -172,6 +172,9 @@ export default HeraldRoot = StackNavigator(
     {
         RootPage: {
             screen: RootPage
+        },
+        JwcDetail: {
+            screen: JwcDetail,
         },
         AllinoneCard: {
             screen: AllinoneCardScreen
